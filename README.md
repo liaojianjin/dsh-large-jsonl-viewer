@@ -4,7 +4,7 @@
   <p><b>Large files. One record at a time.</b></p>
   <p>A read-only JSONL &amp; NDJSON viewer inside DeepSeek Harness.</p>
   <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/v/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm version" /></a>
-  <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/dm/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm downloads" /></a>
+  <a href="./docs/validation.md"><img src="https://img.shields.io/badge/mode-read--only-4d6bfe?style=flat-square" alt="Read-only viewer" /></a>
   <a href="https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases"><img src="https://img.shields.io/github/v/release/liaojianjin/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="GitHub release" /></a>
   <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2-172554?style=flat-square" alt="Targets DSH 0.2.1-rc.2" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a085?style=flat-square" alt="MIT license" /></a>

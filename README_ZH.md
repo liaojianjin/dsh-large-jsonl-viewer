@@ -4,7 +4,7 @@
   <p><b>大文件，逐条看。</b></p>
   <p>在 DeepSeek Harness 中只读浏览 JSONL 与 NDJSON。</p>
   <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/v/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm 版本" /></a>
-  <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/dm/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm 下载量" /></a>
+  <a href="./docs/validation.md"><img src="https://img.shields.io/badge/mode-read--only-4d6bfe?style=flat-square" alt="只读查看器" /></a>
   <a href="https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases"><img src="https://img.shields.io/github/v/release/liaojianjin/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="GitHub 发布版本" /></a>
   <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2-172554?style=flat-square" alt="适配 DSH 0.2.1-rc.2" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a085?style=flat-square" alt="MIT 许可证" /></a>
