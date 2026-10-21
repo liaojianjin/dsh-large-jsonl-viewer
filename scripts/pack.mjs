@@ -3,8 +3,8 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, cp, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-const root = process.cwd(),
-  pkg = resolve('packages/plugins/large-jsonl-viewer');
+const pkg = resolve('packages/plugins/large-jsonl-viewer');
+const manifest = JSON.parse(await readFile(resolve(pkg, 'package.json'), 'utf8'));
 await mkdir(resolve('artifacts'), { recursive: true });
 await writeFile(
   resolve(pkg, 'README.md'),
@@ -33,7 +33,7 @@ const result = spawnSync(
 );
 process.exitCode = result.status ?? 1;
 if (result.status === 0) {
-  const name = 'dsh-large-jsonl-viewer-0.1.0.tgz';
+  const name = `dsh-large-jsonl-viewer-${manifest.version}.tgz`;
   const hash = createHash('sha256')
     .update(await readFile(resolve('artifacts', name)))
     .digest('hex');

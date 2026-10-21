@@ -501,4 +501,4 @@ Harness：
 
 P0 的独立构建/tgz/真实 Web 接入、P1–P3 的主要功能已落地。P4 已完成核心/Gateway 自动测试、安装包 smoke、真实 Web 与官方 Desktop GUI 功能检查、Better Sidebar 0.28.0 兼容路由、原生保存逐字节比对、1/10 GiB 和 32/256 MiB 后端基准、1000 次后端切行；尚未完成跨平台及完整浏览器性能等验收。未验证条目保持原阶段清单，不能理解为全部打勾。
 
-入口与说明：`README.md`；安装包：`artifacts/dsh-large-jsonl-viewer-0.1.0.tgz`；兼容性：`docs/compatibility.md`；结果与限制：`docs/validation.md`。本实现只修改当前仓库，参考仓库作为只读资料使用。
+入口与说明：`README.md`；安装包：`artifacts/dsh-large-jsonl-viewer-0.1.1.tgz`；兼容性：`docs/compatibility.md`；结果与限制：`docs/validation.md`。0.1.1 补充插件图标和发布配置，查看器运行时代码与已验收的 0.1.0 保持一致。本实现只修改当前仓库，参考仓库作为只读资料使用。

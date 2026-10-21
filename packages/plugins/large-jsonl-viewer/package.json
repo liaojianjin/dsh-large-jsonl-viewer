@@ -1,9 +1,13 @@
 {
   "name": "dsh-large-jsonl-viewer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Indexed, read-only JSONL and NDJSON document preview for DeepSeek Harness",
   "license": "MIT",
+  "icon": "./icon.svg",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/liaojianjin/dsh-large-jsonl-viewer.git",
@@ -39,6 +43,7 @@
       "default": "./lib/typert.remote-client.js"
     },
     "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
     "./package.json": "./package.json"
   },
   "files": [
@@ -60,7 +65,8 @@
     "lib/typert.remote-client.d.ts.map",
     "docs/**",
     "screenshots/**",
-    "screenshots.json"
+    "screenshots.json",
+    "icon.svg"
   ],
   "dsh": {
     "bundle": {
@@ -78,6 +84,12 @@
     }
   },
   "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-api-workspace-files": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-fs": "0.2.1-rc.2"
+  },
+  "devDependencies": {
     "@deepseek-ai/cordis": "4.0.5",
     "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
     "@deepseek-ai/dsh-api-workspace-files": "0.2.1-rc.2",

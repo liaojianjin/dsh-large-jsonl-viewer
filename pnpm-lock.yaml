@@ -116,6 +116,13 @@ importers:
 
   packages/plugins/large-jsonl-viewer:
     dependencies:
+      jsonc-parser:
+        specifier: 3.3.1
+        version: 3.3.1
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+    devDependencies:
       '@deepseek-ai/cordis':
         specifier: 4.0.5
         version: 4.0.5
@@ -128,12 +135,6 @@ importers:
       '@deepseek-ai/dsh-typert-protocol':
         specifier: 0.2.1-rc.2
         version: 0.2.1-rc.2(@deepseek-ai/cordis@4.0.5)
-      jsonc-parser:
-        specifier: 3.3.1
-        version: 3.3.1
-      zod:
-        specifier: 4.4.3
-        version: 4.4.3
 
 packages:
 

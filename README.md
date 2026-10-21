@@ -6,19 +6,25 @@
 
 ## 安装
 
-从 [v0.1.0 Release](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.0) 下载预编译包，或直接使用安装地址：
+推荐从 npm 安装 `dsh-large-jsonl-viewer`（当前版本 **0.1.1**）。Desktop：打开 **插件 → 添加插件**，输入包名，安装后点击 **立即启用**。
 
 ```text
-https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.0/dsh-large-jsonl-viewer-0.1.0.tgz
+dsh-large-jsonl-viewer
 ```
 
-Desktop：打开 **插件 → 添加插件**，粘贴地址或下载后的 tgz 路径，安装后点击 **立即启用**。随后从文件面板打开 `.jsonl` / `.ndjson`。替换已安装的测试版本时，先在该插件详情中卸载，再安装新版。
+随后从文件面板打开 `.jsonl` / `.ndjson`。替换已安装版本时，先在该插件详情中卸载，再安装新版。
 
 Web CLI：
 
 ```sh
-dsh plugin --profile web add https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.0/dsh-large-jsonl-viewer-0.1.0.tgz
+dsh plugin --profile web add dsh-large-jsonl-viewer
 dsh web
+```
+
+也可从 [v0.1.1 Release](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.1) 下载预编译 tgz，在 Desktop 输入下载路径或以下固定版本地址：
+
+```text
+https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.1/dsh-large-jsonl-viewer-0.1.1.tgz
 ```
 
 本仓库根目录是开发工作区，不能直接作为 `dsh plugin add` 的源码包。需要自行构建时：
@@ -32,7 +38,7 @@ pnpm pack:plugin
 向已经存在的 Web profile 安装：
 
 ```sh
-dsh plugin --profile web add /absolute/path/artifacts/dsh-large-jsonl-viewer-0.1.0.tgz
+dsh plugin --profile web add /absolute/path/artifacts/dsh-large-jsonl-viewer-0.1.1.tgz
 dsh web
 ```
 

@@ -8,17 +8,24 @@ import vm from 'node:vm';
 import { createRequire } from 'node:module';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-const tar = resolve('artifacts/dsh-large-jsonl-viewer-0.1.0.tgz'),
+const manifest = JSON.parse(
+  await readFile(resolve('packages/plugins/large-jsonl-viewer/package.json'), 'utf8'),
+);
+const tar = resolve(`artifacts/dsh-large-jsonl-viewer-${manifest.version}.tgz`),
   dir = await mkdtemp(join(tmpdir(), 'dsh-jsonl-package-'));
 try {
   const result = spawnSync('tar', ['-xzf', tar, '-C', dir], { stdio: 'inherit' });
   assert.equal(result.status, 0);
   const pkg = JSON.parse(await readFile(join(dir, 'package/package.json'), 'utf8'));
+  assert.equal(pkg.version, manifest.version);
   for (const value of Object.values(pkg.exports)) {
     const path = typeof value === 'string' ? value : value.default;
     if (!path.includes('*')) await readFile(join(dir, 'package', path));
   }
   await readFile(join(dir, 'package/docs/validation.md'));
+  const icon = await readFile(join(dir, 'package', pkg.exports['./icon']));
+  assert.ok(icon.length > 0 && icon.length <= 256 * 1024);
+  assert.equal(pkg.publishConfig.access, 'public');
   await readFile(join(dir, 'package/docs/preview.png'));
   const screenshots = JSON.parse(await readFile(join(dir, 'package/screenshots.json'), 'utf8'));
   for (const path of screenshots) await readFile(join(dir, 'package', path));

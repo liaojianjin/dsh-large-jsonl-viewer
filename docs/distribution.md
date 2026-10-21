@@ -1,6 +1,6 @@
 # 分发与目录收录
 
-插件的独立发布包位于 `packages/plugins/large-jsonl-viewer`，根目录是 private 开发工作区。使用 [GitHub Release v0.1.0](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.0) 的预编译 tgz 安装，不需要在用户机器执行构建脚本。Release 同时提供 SHA-256 校验文件。
+插件的独立发布包位于 `packages/plugins/large-jsonl-viewer`，根目录是 private 开发工作区。从 npm 安装 `dsh-large-jsonl-viewer`，或使用 [GitHub Release v0.1.1](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.1) 的预编译 tgz，不需要在用户机器执行构建脚本。Release 同时提供 SHA-256 校验文件。npm 包的 `repository` 指向本仓库，由目录自动探测 npm 映射，不在投稿 YAML 添加 `npm` 字段。
 
 ## 已准备的条目
 
