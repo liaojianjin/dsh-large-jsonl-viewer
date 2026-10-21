@@ -1,0 +1,25 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/client.tsbuildinfo",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "react"
+    ],
+    "paths": {
+      "dsh-large-jsonl-viewer/types": [
+        "./src/types.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/client/**/*",
+    "src/types.ts"
+  ]
+}

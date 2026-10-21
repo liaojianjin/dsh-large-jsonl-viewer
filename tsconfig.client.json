@@ -1,0 +1,12 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/plugins/large-jsonl-viewer/tsconfig.client.json"
+    },
+    {
+      "path": "packages/build-input/typert-protocol/tsconfig.json"
+    }
+  ],
+  "extends": "./tsconfig.base.json"
+}

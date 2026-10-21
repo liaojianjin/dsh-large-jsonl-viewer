@@ -1,0 +1,212 @@
+.jsonl-native-route {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.jsonl-native-route > .jsonl-viewer {
+  flex: 1;
+  min-height: 0;
+}
+.jsonl-native-route > .jsonl-toolbar {
+  font:
+    13px/1.5 system-ui,
+    sans-serif;
+}
+.jsonl-viewer {
+  height: 100%;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--dsw-text-primary, inherit);
+  background: var(--dsw-background-primary, transparent);
+  font:
+    13px/1.5 system-ui,
+    sans-serif;
+  container-type: inline-size;
+  outline: none;
+}
+.jsonl-viewer * {
+  box-sizing: border-box;
+}
+.jsonl-viewer button,
+.jsonl-viewer input,
+.jsonl-viewer select,
+.jsonl-viewer summary {
+  font: inherit;
+  color: inherit;
+  border: 1px solid var(--dsw-border-primary, #8885);
+  background: var(--dsw-background-secondary, transparent);
+  border-radius: 5px;
+  padding: 3px 7px;
+}
+.jsonl-viewer button,
+.jsonl-viewer summary {
+  cursor: pointer;
+}
+.jsonl-viewer button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.jsonl-viewer :focus-visible {
+  outline: 2px solid var(--dsw-accent-primary, #6387ee);
+  outline-offset: 1px;
+}
+.jsonl-toolbar,
+.jsonl-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.jsonl-toolbar {
+  padding: 6px;
+  border-bottom: 1px solid #8883;
+  flex: none;
+}
+.jsonl-toolbar form {
+  display: flex;
+  gap: 4px;
+}
+.jsonl-toolbar input {
+  width: 75px;
+}
+.jsonl-menu {
+  position: relative;
+}
+.jsonl-menu > div {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 50;
+  width: 210px;
+  padding: 8px;
+  background: var(--dsw-background-primary, Canvas);
+  box-shadow: 0 5px 20px #0004;
+  border: 1px solid #8885;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.jsonl-menu input {
+  width: 65px;
+}
+.jsonl-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+.jsonl-body > main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.jsonl-monaco {
+  flex: 1;
+  min-height: 180px;
+}
+.jsonl-body > aside {
+  position: relative;
+  flex: none;
+  max-width: 40%;
+  padding: 8px;
+  overflow: auto;
+  border-left: 1px solid #8883;
+}
+.jsonl-split {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: col-resize;
+  touch-action: none;
+}
+.jsonl-key {
+  display: block;
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: none !important;
+  background: none !important;
+}
+.jsonl-key small {
+  opacity: 0.55;
+}
+.jsonl-viewer footer {
+  padding: 5px 8px;
+  border-top: 1px solid #8883;
+  font-size: 11px;
+  flex: none;
+}
+.jsonl-viewer footer > button {
+  border: none;
+  background: none;
+}
+.jsonl-viewer footer > span {
+  float: right;
+}
+.jsonl-viewer footer section {
+  max-height: 200px;
+  overflow: auto;
+  padding: 6px;
+}
+.jsonl-error {
+  color: var(--dsw-text-danger, #c65252);
+  padding: 6px;
+  overflow-wrap: anywhere;
+}
+.jsonl-empty {
+  padding: 24px;
+  text-align: center;
+  opacity: 0.7;
+}
+.jsonl-large {
+  padding: 12px;
+  overflow: auto;
+}
+.jsonl-node {
+  padding: 7px;
+  border-bottom: 1px solid #8883;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  overflow-wrap: anywhere;
+}
+.jsonl-node > button {
+  text-align: left;
+  max-width: 55%;
+}
+.jsonl-node code {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55%;
+  white-space: nowrap;
+}
+.jsonl-large pre {
+  font:
+    12px/1.6 ui-monospace,
+    monospace;
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+.jsonl-focus .jsonl-body {
+  flex: 1;
+}
+@container (max-width:480px) {
+  .jsonl-body > aside {
+    display: none;
+  }
+  .jsonl-toolbar {
+    gap: 3px;
+  }
+  .jsonl-toolbar button {
+    padding: 2px 4px;
+  }
+}

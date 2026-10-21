@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "declaration": true,
+    "composite": true,
+    "jsx": "react-jsx",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@deepseek-ai/dsh-typert-protocol": [
+        "./packages/build-input/typert-protocol/declarations/public.d.ts"
+      ],
+      "@deepseek-ai/dsh-typert-protocol/types": [
+        "./packages/build-input/typert-protocol/declarations/types.d.ts"
+      ],
+      "@deepseek-ai/dsh-session/types": [
+        "./packages/build-input/session/declarations/public.d.ts"
+      ],
+      "@deepseek-ai/dsh-api-workspace-files": [
+        "./packages/build-input/workspace-files/declarations/index.d.ts"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+.pnpm-store/
+.DS_Store
+lib/
+artifacts/
+fixtures/
+benchmark-results/
+test-results/
+*.tsbuildinfo
+packages/build-input/
+packages/plugins/large-jsonl-viewer/docs/
+packages/plugins/large-jsonl-viewer/README.md

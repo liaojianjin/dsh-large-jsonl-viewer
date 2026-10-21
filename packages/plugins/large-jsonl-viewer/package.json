@@ -1,0 +1,90 @@
+{
+  "name": "dsh-large-jsonl-viewer",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Indexed, read-only JSONL and NDJSON document preview for DeepSeek Harness",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liaojianjin/dsh-large-jsonl-viewer.git",
+    "directory": "packages/plugins/large-jsonl-viewer"
+  },
+  "homepage": "https://github.com/liaojianjin/dsh-large-jsonl-viewer#readme",
+  "bugs": "https://github.com/liaojianjin/dsh-large-jsonl-viewer/issues",
+  "engines": {
+    "node": "^22.19.0 || >=24",
+    "dsh": "0.2.1-rc.2"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./types": {
+      "types": "./lib/types/types.d.ts",
+      "default": "./lib/types/types.js"
+    },
+    "./typert": {
+      "types": "./lib/typert.host.d.ts",
+      "default": "./lib/typert.host.js"
+    },
+    "./remote": {
+      "types": "./lib/typert.remote-client.d.ts",
+      "default": "./lib/typert.remote-client.js"
+    },
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/workers/*.mjs",
+    "lib/licenses/*",
+    "lib/types/**/*.d.ts",
+    "lib/types/types.js",
+    "locale/*.json",
+    "cordis.patch.yml",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES",
+    "README.md",
+    "lib/typert.host.js",
+    "lib/typert.host.d.ts",
+    "lib/typert.remote-client.js",
+    "lib/typert.remote-client.d.ts",
+    "lib/typert.remote-client.d.ts.map",
+    "docs/**",
+    "screenshots/**",
+    "screenshots.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-api-workspace-files": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-fs": "0.2.1-rc.2"
+  },
+  "dependencies": {
+    "jsonc-parser": "3.3.1",
+    "zod": "4.4.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/host.tsbuildinfo",
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "dsh-large-jsonl-viewer/types": [
+        "./src/types.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/client"
+  ]
+}

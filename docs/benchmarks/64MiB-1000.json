@@ -1,0 +1,70 @@
+{
+  "artifactSha256": {
+    "index.js": "d7d2fa4cb4ad604c1b8d628268dc88b07e47ba0f96d312d7633716268a65a927",
+    "workers/index.mjs": "2132a28366b301fb591cf83b81f0e8093ccd1c000a5a8787993d3082cd4cd170",
+    "workers/record.mjs": "12b1ddfdfdd8710dcb6cda0e163c73a22bd0d64aedc3218a98cd67a65a9adf36"
+  },
+  "date": "2026-10-20T15:28:04.982Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "node": "v26.7.0",
+  "cpu": "Apple M5 Pro",
+  "totalMemory": 68719476736,
+  "bytes": 67206544,
+  "longMiB": 0,
+  "switches": 1000,
+  "lines": 656,
+  "readBeforeMs": 24.538166000000018,
+  "readAfterMs": 18.921416999997746,
+  "indexMs": 66.720583,
+  "firstRecordMs": 29.436542000000003,
+  "first100Ms": 33.530666999999994,
+  "throughputRatio": 0.28359190146761376,
+  "recordP50Ms": 30.63804099999834,
+  "recordP95Ms": 33.92595900000015,
+  "peakHostAndWorkersRssMiB": 198.75,
+  "restored": true,
+  "rssAtIntervalsMiB": [
+    {
+      "after": 100,
+      "rss": 180.40625
+    },
+    {
+      "after": 200,
+      "rss": 173.046875
+    },
+    {
+      "after": 300,
+      "rss": 174.625
+    },
+    {
+      "after": 400,
+      "rss": 182.78125
+    },
+    {
+      "after": 500,
+      "rss": 190.515625
+    },
+    {
+      "after": 600,
+      "rss": 185.203125
+    },
+    {
+      "after": 700,
+      "rss": 173.046875
+    },
+    {
+      "after": 800,
+      "rss": 164.234375
+    },
+    {
+      "after": 900,
+      "rss": 171.5625
+    },
+    {
+      "after": 1000,
+      "rss": 150.234375
+    }
+  ],
+  "cache": "uncontrolled OS cache; warm reads; no browser timings"
+}

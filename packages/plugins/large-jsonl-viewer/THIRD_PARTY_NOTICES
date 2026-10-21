@@ -1,0 +1,4 @@
+Includes code adapted from vscode-large-jsonl-viewer, MIT, commit 9c90a87433b82ab615094a39d0ef1c17dadbc5b7.
+Copyright (c) 2026 Large JSONL Viewer contributors
+Harness build format and API adaptation reference deepseek-ai/deepseek-harness (MIT), commit 687f282e8625c6b8d11ff58211a90524be2e4317.
+Monaco Editor and jsonc-parser license notices are included under lib/licenses/.

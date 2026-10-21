@@ -1,0 +1,29 @@
+{
+  "artifactSha256": {
+    "index.js": "d7d2fa4cb4ad604c1b8d628268dc88b07e47ba0f96d312d7633716268a65a927",
+    "workers/index.mjs": "2132a28366b301fb591cf83b81f0e8093ccd1c000a5a8787993d3082cd4cd170",
+    "workers/record.mjs": "12b1ddfdfdd8710dcb6cda0e163c73a22bd0d64aedc3218a98cd67a65a9adf36"
+  },
+  "date": "2026-10-20T15:27:02.878Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "node": "v26.7.0",
+  "cpu": "Apple M5 Pro",
+  "totalMemory": 68719476736,
+  "bytes": 1073767969,
+  "longMiB": 0,
+  "switches": 30,
+  "lines": 10481,
+  "readBeforeMs": 314.75575000000003,
+  "readAfterMs": 267.8079170000001,
+  "indexMs": 413.07891700000005,
+  "firstRecordMs": 33.41695800000002,
+  "first100Ms": 37.72883300000012,
+  "throughputRatio": 0.6483214368454444,
+  "recordP50Ms": 30.575624999999945,
+  "recordP95Ms": 33.63816699999961,
+  "peakHostAndWorkersRssMiB": 280.375,
+  "restored": true,
+  "rssAtIntervalsMiB": [],
+  "cache": "uncontrolled OS cache; warm reads; no browser timings"
+}
