@@ -165,6 +165,8 @@ pnpm test:packaging
 
 [更新记录](./docs/changelog.md) · [验证报告](./docs/validation.md) · [问题反馈](https://github.com/liaojianjin/dsh-large-jsonl-viewer/issues) · [目录收录](./docs/distribution.md)
 
+另提供通过 [GitHub Packages Actions](./docs/github-packages.md) 发布的 scoped 分发包；上方 npmjs.org 包名与安装命令保持不变。
+
 ## 📄 许可与致谢
 
 MIT。实现改编自 [VS Code Large JSONL Viewer](https://github.com/liaojianjin/vscode-large-jsonl-viewer)，参考 commit `9c90a87433b82ab615094a39d0ef1c17dadbc5b7`；Harness 接口参考 commit `687f282e8625c6b8d11ff58211a90524be2e4317`。许可证见 [LICENSE](./LICENSE) 和发布包中的第三方声明。

@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = process.cwd(),
   pkg = path.join(root, 'packages/plugins/large-jsonl-viewer');
+const { name: packageName } = JSON.parse(await readFile(path.join(pkg, 'package.json'), 'utf8'));
 const tsc = (...args) => {
   const result = spawnSync(process.execPath, ['node_modules/typescript/bin/tsc', ...args], {
     stdio: 'inherit',
@@ -133,7 +134,7 @@ await build({
   target: 'node22',
   external: ['@deepseek-ai/*'],
 });
-const artifacts = new WorkspaceTypertGenerator(root).generate(['dsh-large-jsonl-viewer'], ['host']);
+const artifacts = new WorkspaceTypertGenerator(root).generate([packageName], ['host']);
 if (!artifacts.length || !artifacts.some((a) => a.remote))
   throw new Error('No strict Remote artifacts generated');
 writeWorkspaceArtifacts(root, artifacts);
@@ -191,7 +192,7 @@ const client = await build({
 const js = client.outputFiles.find((f) => f.path.endsWith('.js')) ?? client.outputFiles[0];
 await writeFile(
   path.join(pkg, 'lib/client.js'),
-  `window.__ModuleLoader__.load({id:"dsh-large-jsonl-viewer",factory(require){const module={exports:{}};(function(module,exports){\n${js.text}\n})(module,module.exports);const apply=module.exports.apply;const stylesheet=${JSON.stringify(client.outputFiles.find((f) => f.path.endsWith('.css'))?.text ?? '')};const result={...module.exports,apply(ctx){ctx.effect(()=>{const style=document.createElement('style');style.textContent=stylesheet;document.head.appendChild(style);return()=>style.remove();});return apply(ctx);}};return result;}});\n`,
+  `window.__ModuleLoader__.load({id:${JSON.stringify(packageName)},factory(require){const module={exports:{}};(function(module,exports){\n${js.text}\n})(module,module.exports);const apply=module.exports.apply;const stylesheet=${JSON.stringify(client.outputFiles.find((f) => f.path.endsWith('.css'))?.text ?? '')};const result={...module.exports,apply(ctx){ctx.effect(()=>{const style=document.createElement('style');style.textContent=stylesheet;document.head.appendChild(style);return()=>style.remove();});return apply(ctx);}};return result;}});\n`,
 );
 await mkdir(path.join(pkg, 'lib/licenses'), { recursive: true });
 for (const [module, file] of [

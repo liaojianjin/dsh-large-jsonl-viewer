@@ -165,6 +165,8 @@ Builds compile Host and Client separately, generate strict Typert protocols, and
 
 [Changelog](./docs/changelog.md) · [Validation](./docs/validation.md) · [Issues](https://github.com/liaojianjin/dsh-large-jsonl-viewer/issues) · [Catalog submission](./docs/distribution.md)
 
+An additional scoped distribution is published through [GitHub Packages Actions](./docs/github-packages.md); the npmjs.org package and install command above retain their original identity.
+
 ## 📄 License & acknowledgements
 
 MIT. The implementation adapts code from [VS Code Large JSONL Viewer](https://github.com/liaojianjin/vscode-large-jsonl-viewer), reference commit `9c90a87433b82ab615094a39d0ef1c17dadbc5b7`, and uses Harness APIs from reference commit `687f282e8625c6b8d11ff58211a90524be2e4317`. See [LICENSE](./LICENSE) and the package's third-party notices.

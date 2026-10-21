@@ -11,13 +11,28 @@ import { renderToString } from 'react-dom/server';
 const manifest = JSON.parse(
   await readFile(resolve('packages/plugins/large-jsonl-viewer/package.json'), 'utf8'),
 );
+const expectedName = process.argv[3] ?? manifest.name;
 const tar = resolve(process.argv[2] ?? `artifacts/dsh-large-jsonl-viewer-${manifest.version}.tgz`),
   dir = await mkdtemp(join(tmpdir(), 'dsh-jsonl-package-'));
 try {
   const result = spawnSync('tar', ['-xzf', tar, '-C', dir], { stdio: 'inherit' });
   assert.equal(result.status, 0);
   const pkg = JSON.parse(await readFile(join(dir, 'package/package.json'), 'utf8'));
+  assert.equal(pkg.name, expectedName);
   assert.equal(pkg.version, manifest.version);
+  assert.equal(
+    pkg.publishConfig.registry,
+    expectedName.startsWith('@liaojianjin/') ? 'https://npm.pkg.github.com' : undefined,
+  );
+  const patch = await readFile(join(dir, 'package/cordis.patch.yml'), 'utf8');
+  assert.ok(
+    patch
+      .split('\n')
+      .some(
+        (line) =>
+          line.trim() === `name: ${expectedName}` || line.trim() === `name: '${expectedName}'`,
+      ),
+  );
   for (const value of Object.values(pkg.exports)) {
     const path = typeof value === 'string' ? value : value.default;
     if (!path.includes('*')) await readFile(join(dir, 'package', path));
@@ -70,7 +85,7 @@ try {
     },
     { timeout: 5000 },
   );
-  assert.equal(entry.id, 'dsh-large-jsonl-viewer');
+  assert.equal(entry.id, expectedName);
   const plugin = entry.factory(createRequire(import.meta.url));
   assert.equal(typeof plugin.apply, 'function');
   let body, nativeBody;

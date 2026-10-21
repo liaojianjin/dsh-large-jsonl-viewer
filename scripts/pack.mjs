@@ -31,7 +31,7 @@ const result = spawnSync('npm', ['pack', '--ignore-scripts', '--pack-destination
 });
 process.exitCode = result.status ?? 1;
 if (result.status === 0) {
-  const name = `dsh-large-jsonl-viewer-${manifest.version}.tgz`;
+  const name = `${manifest.name.replace(/^@/, '').replace('/', '-')}-${manifest.version}.tgz`;
   const hash = createHash('sha256')
     .update(await readFile(resolve(output, name)))
     .digest('hex');
