@@ -58,6 +58,7 @@
     "LICENSE",
     "THIRD_PARTY_NOTICES",
     "README.md",
+    "README_ZH.md",
     "lib/typert.host.js",
     "lib/typert.host.d.ts",
     "lib/typert.remote-client.js",

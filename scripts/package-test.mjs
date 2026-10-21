@@ -11,7 +11,7 @@ import { renderToString } from 'react-dom/server';
 const manifest = JSON.parse(
   await readFile(resolve('packages/plugins/large-jsonl-viewer/package.json'), 'utf8'),
 );
-const tar = resolve(`artifacts/dsh-large-jsonl-viewer-${manifest.version}.tgz`),
+const tar = resolve(process.argv[2] ?? `artifacts/dsh-large-jsonl-viewer-${manifest.version}.tgz`),
   dir = await mkdtemp(join(tmpdir(), 'dsh-jsonl-package-'));
 try {
   const result = spawnSync('tar', ['-xzf', tar, '-C', dir], { stdio: 'inherit' });
@@ -26,6 +26,14 @@ try {
   const icon = await readFile(join(dir, 'package', pkg.exports['./icon']));
   assert.ok(icon.length > 0 && icon.length <= 256 * 1024);
   assert.equal(pkg.publishConfig.access, 'public');
+  for (const name of ['README.md', 'README_ZH.md']) {
+    const markdown = await readFile(join(dir, 'package', name), 'utf8');
+    for (const match of markdown.matchAll(
+      /\[[^\]]*\]\((\.\/[^)]+)\)|(?:src|href)="(\.\/[^"]+)"/g,
+    )) {
+      await readFile(join(dir, 'package', (match[1] ?? match[2]).split('#')[0]));
+    }
+  }
   await readFile(join(dir, 'package/docs/preview.png'));
   const screenshots = JSON.parse(await readFile(join(dir, 'package/screenshots.json'), 'utf8'));
   for (const path of screenshots) await readFile(join(dir, 'package', path));
