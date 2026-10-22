@@ -187,6 +187,13 @@ const client = await build({
     },
   ],
   external: ['react', 'react-dom', 'zod', '@deepseek-ai/cordis'],
+  // editor.api omits the icon font; Monaco's package exports only resolve JS modules.
+  alias: {
+    'monaco-codicons.css': path.join(
+      root,
+      'node_modules/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.css',
+    ),
+  },
   loader: { '.ttf': 'dataurl' },
 });
 const js = client.outputFiles.find((f) => f.path.endsWith('.js')) ?? client.outputFiles[0];

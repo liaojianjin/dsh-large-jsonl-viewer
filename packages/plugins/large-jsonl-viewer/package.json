@@ -1,6 +1,6 @@
 {
   "name": "dsh-large-jsonl-viewer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Indexed, read-only JSONL and NDJSON document preview for DeepSeek Harness",
   "license": "MIT",

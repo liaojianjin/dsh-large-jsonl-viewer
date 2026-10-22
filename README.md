@@ -64,10 +64,10 @@ Desktop has its own plugin installation tree. A system CLI's `web` profile is no
 <details>
 <summary><b>Prebuilt Release archive &amp; updating</b></summary>
 
-Download the archive and SHA-256 checksums from [v0.1.1](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.1), or paste its fixed URL into Desktop's Add plugin dialog:
+Download the archive and SHA-256 checksums from [v0.1.2](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.2), or paste its fixed URL into Desktop's Add plugin dialog:
 
 ```text
-https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.1/dsh-large-jsonl-viewer-0.1.1.tgz
+https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.2/dsh-large-jsonl-viewer-0.1.2.tgz
 ```
 
 To replace an installed version in Desktop, uninstall this plugin from its detail page, then install and enable the new version. CLI installation/removal requires restarting the corresponding profile. The repository root is a private development workspace; use the prebuilt package for installation.

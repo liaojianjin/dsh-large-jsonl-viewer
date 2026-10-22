@@ -127,6 +127,19 @@ try {
     },
   };
   plugin.apply(ctx);
+  const stylesheet = styles[0].textContent;
+  const iconFont = await readFile(
+    resolve('node_modules/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf'),
+  );
+  assert.ok(
+    /@font-face\{[^}]*font-family:["']?codicon["']?[;}]/.test(stylesheet),
+    'Codicon font-face is installed with the Client stylesheet',
+  );
+  assert.ok(stylesheet.includes(iconFont.toString('base64')), 'Codicon font is bundled offline');
+  assert.ok(
+    /\.codicon\[class\*=(?:"codicon-"|'codicon-'|codicon-)\]/.test(stylesheet),
+    'Codicon glyphs use their bundled icon font',
+  );
   const props = {
     useTabInfo: () => ({
       tab: {

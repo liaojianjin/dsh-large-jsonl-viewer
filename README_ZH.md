@@ -64,10 +64,10 @@ Desktop 有自己的插件安装树，不能假定系统 CLI 的 `web` profile �
 <details>
 <summary><b>预编译 Release 安装包与更新</b></summary>
 
-从 [v0.1.1](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.1) 下载 tgz 与 SHA-256 校验文件，或把固定版本地址粘贴到 Desktop 的添加插件对话框：
+从 [v0.1.2](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.2) 下载 tgz 与 SHA-256 校验文件，或把固定版本地址粘贴到 Desktop 的添加插件对话框：
 
 ```text
-https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.1/dsh-large-jsonl-viewer-0.1.1.tgz
+https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.2/dsh-large-jsonl-viewer-0.1.2.tgz
 ```
 
 Desktop 替换已安装版本时，先在该插件详情中卸载，再安装并启用新版。CLI 安装或卸载后需重启对应 profile。仓库根目录是 private 开发工作区，安装应使用预编译包。
