@@ -6,21 +6,34 @@ GitHub Packages 另提供带作用域的 `@liaojianjin/dsh-large-jsonl-viewer`�
 
 ## 目录条目
 
-**普通 npm 发版不需要每次提交目录 PR。** npm 映射及版本信息由上游自动采集；目录和市场优先使用已验证的 npm 安装来源。当前条目另外固定了 v0.1.2 的 Release 备用包，只有要让这个固定备用地址跟随新版本时，才需要更新那一行。
-
-要减少此类更新，可在每个正式 Release 同时附加一个固定名的 `dsh-large-jsonl-viewer.tgz`，然后只提交一次目录 PR，将 `tarball` 改成：
+**普通 npm 发版不需要每次提交目录 PR。** npm 映射及版本信息由上游自动采集；目录和市场优先使用已验证的 npm 安装来源。GitHub Release 另提供固定文件名的备用安装包：
 
 ```yaml
 tarball: https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/latest/download/dsh-large-jsonl-viewer.tgz
 ```
 
-后续版本只需在各自的新 Release 中上传同名资产，并将正确的正式版本设为 latest。仍保留带版本号的 tgz 和校验文件供固定安装；不要覆盖旧 Release 的资产。不能把 `latest/download/` 与带版本号的文件名组合，否则下一次发版就会失效。
+`latest/download/` 只替换 Release 标签，不会改写文件名。每个正式 Release 都需要实际包含 `dsh-large-jsonl-viewer.tgz`；它与同一 Release 的带版本号安装包逐字节一致。带版本号的安装包和原校验文件继续保留。
 
-上述固定名方案尚未发布资产或修改上游目录；当前有效的备用下载仍为下面已合并条目所指向的版本。规则见 [上游贡献指南](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md)。
+## 固定名安装包的自动发布
 
-首次收录已通过 [awesome-dsh-plugin #8516](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/8516) 合并。本仓库的 [条目文件](registry/liaojianjin__dsh-large-jsonl-viewer--packages-plugins-large-jsonl-viewer.yml) 已准备 v0.1.4 的固定 `tarball`；上游固定备用包目前仍为 v0.1.2，本次发布未自动创建目录更新 PR。上游已有条目仍需通过目录仓库的版本更新 PR 同步，不会因本仓库发 Release 而自动替换固定 URL。提交时只更新该条目，不修改生成的 README。
+[Publish Release download alias](../.github/workflows/publish-release-alias.yml) 在正式 Release 发布后自动执行，不调用 npm、不重新构建安装包：
 
-- [awesome-dsh-plugin 贡献规则](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md)允许 monorepo 子包。条目 URL 指向含 `dsh.bundle` 的插件子目录，使用 `docs` 分类，声明英文/中文功能描述及固定版本的 GitHub Release `tarball`。
+1. 从该 Release 下载带版本号的 tgz 和 `SHA256SUMS.txt`。
+2. 核对 SHA-256、包名、包版本与 Release 标签及 `dsh.bundle`。
+3. 将同一份字节以固定名上传，再下载固定名包核对内容。
+4. 已有相同内容时重跑不会再次上传；已有不同内容时失败，不覆盖既有资产。草稿 / 预发布版不会作为最新正式版处理。
+
+发布 Release 时应同时上传带版本号的安装包与校验文件，然后等待此工作流成功。既有正式 Release 可从 Actions 页选择 **Publish Release download alias → Run workflow**，使用 main 分支，填写 `tag`（例如 `v0.1.4`）补齐；这也是上传失败后重跑的入口。手动执行不会修改 latest 的选择。
+
+仅此 job 具有 `contents: write`，使用仓库自带的 `GITHUB_TOKEN`，不需要额外长期凭据。发布脚本位于 [publish-release-alias.mjs](../scripts/publish-release-alias.mjs)，本地验证：`node --test tests/release-alias.test.mjs`。
+
+## 上游收录
+
+首次收录已通过 [awesome-dsh-plugin #8516](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/8516) 合并。[本仓库条目](registry/liaojianjin__dsh-large-jsonl-viewer--packages-plugins-large-jsonl-viewer.yml) 使用固定名 latest 地址，兼容说明为 `DSH >=0.2.1-rc.2`；上游通过一次条目更新 PR 切换，之后单纯发新版无需修改 tarball 行。简介、分类或仓库地址变化时仍需更新对应条目，不修改生成的 README。
+
+规则见 [上游贡献指南](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md)。
+
+- [awesome-dsh-plugin 贡献规则](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md)允许 monorepo 子包。条目 URL 指向含 `dsh.bundle` 的插件子目录，使用 `docs` 分类，声明英文/中文功能描述及可跟随最新正式版的 GitHub Release `tarball`。
 - 插件子目录提供 `screenshots.json` 及两张真实 Desktop 截图；路径均在插件目录内。
 - [dsh-market 的说明](https://github.com/dsh-market/dsh-market#contributing)明确它是市场应用，插件目录来自 awesome-dsh-plugin。条目合并后由市场同步，无需向 dsh-market 重复提交。
 

@@ -1,0 +1,40 @@
+name: Publish Release download alias
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing stable Release tag to backfill, for example v0.1.4'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-alias-${{ github.repository }}-${{ github.event.release.tag_name || inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  alias:
+    if: github.repository == 'liaojianjin/dsh-large-jsonl-viewer' && (github.event_name != 'release' || !github.event.release.prerelease)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+      - name: Test Release alias validation and immutable-asset handling
+        run: node --test tests/release-alias.test.mjs
+      - name: Copy and verify the fixed-name Release asset
+        run: node scripts/publish-release-alias.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
