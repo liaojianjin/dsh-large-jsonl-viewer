@@ -20,6 +20,12 @@ try {
   const pkg = JSON.parse(await readFile(join(dir, 'package/package.json'), 'utf8'));
   assert.equal(pkg.name, expectedName);
   assert.equal(pkg.version, manifest.version);
+  assert.deepEqual(pkg.engines, manifest.engines, 'Packaged runtime requirements match the source');
+  assert.deepEqual(
+    pkg.peerDependencies,
+    manifest.peerDependencies,
+    'Packaged shared peer requirements match the source',
+  );
   assert.equal(
     pkg.publishConfig.registry,
     expectedName.startsWith('@liaojianjin/') ? 'https://npm.pkg.github.com' : undefined,

@@ -1,6 +1,12 @@
 # Compatibility and build notes
 
-Version **0.1.3** targets Harness **0.2.1-rc.2 or 0.2.1-rc.3**, Cordis **4.0.5**. The host engine and shared DSH peer ranges declare only those two verified versions. Development dependencies remain pinned to rc.2; other Harness releases are not claimed compatible.
+Version **0.1.4** requires Harness **>=0.2.1-rc.2**, with no upper bound or exact-version allowlist. The host engine and all shared `@deepseek-ai/dsh-*` peer ranges use that same minimum. Node and Cordis requirements are unchanged, and development dependencies remain pinned to rc.2. Runtime regression coverage remains rc.2 / rc.3; the broader installation range is an explicit compatibility policy, not a claim that every future runtime has been tested.
+
+## 2026-10-24 minimum-version policy
+
+- The official Harness compatibility evaluator includes prereleases in ranges. `>=0.2.1-rc.2` accepts rc.2, rc.3, rc.4, 0.2.1, and later prerelease / stable releases, while rejecting rc.1 and 0.2.0.
+- Both the `engines.dsh` and shared DSH peer declarations use the lower bound; package checks ensure the unscoped and GitHub-scoped artifacts retain the source requirements.
+- Viewer runtime files are unchanged from 0.1.3. The earlier 0.1.3 Release and GitHub Packages version remain immutable; 0.1.4 carries the new published policy.
 
 ## 2026-10-24 rc.3 assessment
 

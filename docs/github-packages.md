@@ -30,7 +30,7 @@ Map only this scope in the npm configuration used by your Harness profile:
 Then install into the intended profile:
 
 ```sh
-dsh plugin --profile web add @liaojianjin/dsh-large-jsonl-viewer@0.1.3
+dsh plugin --profile web add @liaojianjin/dsh-large-jsonl-viewer@0.1.4
 ```
 
 Desktop's profile is separate from the CLI Web profile. The usual npmjs.org installation remains:

@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/v/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm 版本" /></a>
   <a href="./docs/validation.md"><img src="https://img.shields.io/badge/mode-read--only-4d6bfe?style=flat-square" alt="只读查看器" /></a>
   <a href="https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases"><img src="https://img.shields.io/github/v/release/liaojianjin/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="GitHub 发布版本" /></a>
-  <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2%20%2F%20rc.3-172554?style=flat-square" alt="适配 DSH 0.2.1-rc.2 / rc.3" /></a>
+  <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.2-172554?style=flat-square" alt="要求 DSH >=0.2.1-rc.2" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a085?style=flat-square" alt="MIT 许可证" /></a>
   <p><a href="./README.md">English</a> · <b>简体中文</b></p>
   <p><a href="#-功能一览">功能</a> · <a href="#-安装">安装</a> · <a href="#-实测性能">性能</a> · <a href="#-常见问题">常见问题</a></p>
@@ -44,7 +44,7 @@
 
 ## 🚀 安装
 
-**兼容版本：DeepSeek Harness 0.2.1-rc.2 / 0.2.1-rc.3。** 已在 macOS arm64 验证；Web、官方 Desktop、Better Sidebar 0.28.0 与 rc.3 的具体验收范围见[验证报告](./docs/validation.md)。其他 Harness 版本暂未声明兼容。
+**最低版本：DeepSeek Harness >=0.2.1-rc.2。** rc.2 及之后的版本均允许安装，包括后续预发布版；rc.2 / rc.3 的 Web、官方 Desktop 与 Better Sidebar 实际验收范围见[验证报告](./docs/validation.md)。
 
 ### Desktop
 
@@ -70,10 +70,10 @@ Desktop 有自己的插件安装树，不能假定系统 CLI 的 `web` profile �
 <details>
 <summary><b>预编译 Release 安装包与更新</b></summary>
 
-从 [v0.1.3](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.3) 下载 tgz 与 SHA-256 校验文件，或把固定版本地址粘贴到 Desktop 的添加插件对话框：
+从 [v0.1.4](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.4) 下载 tgz 与 SHA-256 校验文件，或把固定版本地址粘贴到 Desktop 的添加插件对话框：
 
 ```text
-https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.3/dsh-large-jsonl-viewer-0.1.3.tgz
+https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.4/dsh-large-jsonl-viewer-0.1.4.tgz
 ```
 
 Desktop 替换已安装版本时，先在该插件详情中卸载，再安装并启用新版。CLI 安装或卸载后需重启对应 profile。仓库根目录是 private 开发工作区，安装应使用预编译包。
