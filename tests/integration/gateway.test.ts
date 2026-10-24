@@ -11,6 +11,7 @@ import Gateway from '@deepseek-ai/dsh-api-gateway';
 import RemoteAccess from '@deepseek-ai/dsh-api-remote-access';
 import { LocalFileSystem } from '@deepseek-ai/dsh-fs-local';
 import WorkspaceFiles from '@deepseek-ai/dsh-api-workspace-files';
+import { TYPERT as WORKSPACE_TYPERT } from '@deepseek-ai/dsh-api-workspace-files/typert';
 import { Peer } from '@deepseek-ai/dsh-client-connection';
 import { SessionId } from '@deepseek-ai/dsh-session/types';
 import { remoteErrorOf } from '@deepseek-ai/dsh-typert-protocol';
@@ -40,9 +41,32 @@ test(
       });
       ctx.sessions.create(SessionId('fixture'), { meta: { cwd: root, origin: 'subagent' } });
       ctx.typert.register(TYPERT);
+      ctx.typert.register(WORKSPACE_TYPERT);
       await ctx.plugin(LargeJsonl, { cacheDirectory: join(root, 'cache') });
       peer = new Peer(ctx, { principal: { kind: 'owner' } });
       await writeFile(join(root, 'a.jsonl'), '{"n":9007199254740993}\r\n');
+      const directory = await ctx.typertGateway.invoke({
+        namespace: 'workspaceFiles',
+        method: 'list',
+        args: { workspaceFileScopeId: 'fixture', path: '.' },
+        peer,
+        signal: abort.signal,
+      });
+      assert.equal(directory.path, '');
+      assert.ok(directory.entries.some((entry) => entry.name === 'a.jsonl'));
+      const cwdDirectory = await ctx.typertGateway.invoke({
+        namespace: 'workspaceFiles',
+        method: 'list',
+        args: { workspaceFileScopeId: 'fixture', path: root },
+        peer,
+        signal: abort.signal,
+      });
+      assert.equal(
+        cwdDirectory.path,
+        '',
+        'A cwd request returns a relative reply path, not the tree key',
+      );
+      assert.ok(cwdDirectory.entries.some((entry) => entry.name === 'a.jsonl'));
       const request = (method, args, signal = abort.signal) => ({
         namespace: 'largeJsonl',
         method,

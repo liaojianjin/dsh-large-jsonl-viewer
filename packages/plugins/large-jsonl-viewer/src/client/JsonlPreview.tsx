@@ -5,10 +5,13 @@ import {
   useEffect,
   useRef,
   useState,
+  useId,
+  useSyncExternalStore,
   type KeyboardEvent,
   type PointerEvent,
 } from 'react';
 import type { DocumentPreviewProps } from '@deepseek-ai/dsh-client-ui-sidebar-documentpreview/client';
+import type {} from '@deepseek-ai/dsh-client-ui-session/client';
 import type { PropsLocale } from '@deepseek-ai/dsh-client-ui-slots';
 import type { ViewSnapshot, RecordResult, IndexAction, OutlineNode } from '../types.ts';
 import type { ViewerFace } from './face.ts';
@@ -17,6 +20,8 @@ import type { EditorActions } from './MonacoRecord.tsx';
 import { LargeRecord } from './LargeRecord.tsx';
 import { SourceState } from './source-state.ts';
 import { randomLine } from './navigation.ts';
+import { fileAddressFor } from '@deepseek-ai/dsh-util-workspace-path';
+import { FileBrowser } from './FileBrowser.tsx';
 const MonacoRecord = lazy(() => import('./MonacoRecord.tsx'));
 interface FileSink {
   write(bytes: Uint8Array<ArrayBuffer>): Promise<void>;
@@ -30,15 +35,51 @@ interface SaveWindow extends Window {
 }
 export type PreviewProps = Pick<
   DocumentPreviewProps,
-  'useTabInfo' | 'resourceAddress' | 'content' | 'wrap'
+  'useTabInfo' | 'useSessions' | 'resourceAddress' | 'content' | 'wrap'
 > &
   ViewerFace &
   PropsLocale<'largeJsonl'>;
 export function JsonlPreview(props: PreviewProps) {
   const { tab } = props.useTabInfo(),
+    browserId = useId(),
+    filesOpen = useSyncExternalStore(
+      props.browser.subscribe,
+      props.browser.getSnapshot,
+      props.browser.getSnapshot,
+    ),
+    file = props.sessionId(props.resourceAddress),
+    cwd = props.useSessions((sessions) => sessions.byId[file.sessionId]?.cwd);
+  if (props.content.kind !== 'renderer') return null;
+  return (
+    <div className="jsonl-preview-shell">
+      {filesOpen && (
+        <FileBrowser
+          key={'files:' + JSON.stringify([file.sessionId, cwd])}
+          id={browserId}
+          files={props.files}
+          preferences={props.browser}
+          current={file}
+          cwd={cwd}
+          signal={tab.signal}
+          onOpen={(path) => tab.actions.openResource(fileAddressFor(file.sessionId, cwd, path))}
+          onClose={() => props.browser.setOpen(false)}
+          t={props.t}
+        />
+      )}
+      <RecordPreview
+        key={'record:' + props.resourceAddress}
+        {...props}
+        filesOpen={filesOpen}
+        browserId={browserId}
+      />
+    </div>
+  );
+}
+function RecordPreview(props: PreviewProps & { filesOpen: boolean; browserId: string }) {
+  const { tab } = props.useTabInfo(),
     request = props.content.kind === 'renderer' ? props.content : undefined;
   const file = props.sessionId(props.resourceAddress),
-    saved = props.getState(tab.id, tab.signal),
+    saved = props.getState(tab.id, tab.signal, props.resourceAddress),
     t = (key: Key) => props.t(key);
   const [snapshot, setSnapshot] = useState<ViewSnapshot>(),
     [result, setResult] = useState<RecordResult>(),
@@ -400,6 +441,14 @@ export function JsonlPreview(props: PreviewProps) {
       data-jsonl-viewer
     >
       <div className="jsonl-toolbar">
+        <button
+          title={t(props.filesOpen ? 'hideFiles' : 'showFiles')}
+          aria-expanded={props.filesOpen}
+          aria-controls={props.browserId}
+          onClick={() => props.browser.setOpen(!props.filesOpen)}
+        >
+          {t('files')}
+        </button>
         <button title={t('back')} disabled={!saved.history.canGoBack} onClick={() => move(-1)}>
           ←
         </button>

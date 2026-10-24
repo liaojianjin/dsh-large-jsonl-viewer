@@ -6,14 +6,182 @@
   display: flex;
   flex-direction: column;
 }
-.jsonl-native-route > .jsonl-viewer {
+.jsonl-native-route > .jsonl-preview-shell {
   flex: 1;
   min-height: 0;
+  height: auto;
 }
 .jsonl-native-route > .jsonl-toolbar {
   font:
     13px/1.5 system-ui,
     sans-serif;
+}
+.jsonl-preview-shell {
+  height: 100%;
+  min-height: 220px;
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+  color: var(--dsw-text-primary, inherit);
+  background: var(--dsw-background-primary, transparent);
+  font:
+    13px/1.5 system-ui,
+    sans-serif;
+}
+.jsonl-preview-shell > .jsonl-viewer {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+.jsonl-file-browser {
+  flex: 0 0 clamp(170px, 24%, 280px);
+  max-width: 45%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--dsw-alias-label-primary, inherit);
+  border-right: 0.5px solid var(--dsw-alias-border-l3, #8883);
+  background: var(--dsw-background-primary, transparent);
+  font-size: var(--dsh-content-font-size-secondary, 13px);
+}
+.jsonl-file-browser * {
+  box-sizing: border-box;
+}
+.jsonl-file-browser button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+  color: var(--dsw-alias-label-secondary, inherit);
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  border-radius: var(--dsw-radius-sm, 4px);
+  cursor: pointer;
+}
+.jsonl-file-browser button:hover {
+  background: var(--dsw-alias-interactive-bg-hover, #8882);
+}
+.jsonl-file-browser button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.jsonl-file-browser :focus-visible {
+  outline: 2px solid var(--dsw-accent-primary, #6387ee);
+  outline-offset: -2px;
+}
+.jsonl-file-heading,
+.jsonl-file-root {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 6px 0 16px;
+  border-bottom: 0.5px solid var(--dsw-alias-border-l3, #8883);
+}
+.jsonl-file-heading {
+  justify-content: space-between;
+}
+.jsonl-file-tools {
+  display: flex;
+  gap: 2px;
+}
+.jsonl-file-path {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(to right, transparent, black 12px);
+}
+.jsonl-file-path > * {
+  flex: 0 0 auto;
+}
+.jsonl-file-path-prefix {
+  color: var(--dsw-alias-label-tertiary, #999);
+}
+.jsonl-file-path strong {
+  font-weight: 500;
+}
+.jsonl-file-list {
+  flex: 1;
+  min-height: 0;
+  margin-right: 2px;
+  padding: 8px 0 8px 8px;
+  overflow: auto;
+  overflow-anchor: none;
+  scrollbar-gutter: stable;
+}
+.jsonl-file-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.jsonl-file-list ul ul {
+  padding-left: 18px;
+}
+.jsonl-file-list [role='treeitem'] {
+  outline: none;
+}
+.jsonl-file-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  border-radius: var(--dsw-radius-md, 6px);
+  padding: 5px 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.jsonl-file-row:hover {
+  background: var(--dsw-alias-interactive-bg-hover, #8882);
+}
+.jsonl-file-list [role='treeitem']:focus-visible > .jsonl-file-row {
+  outline: 2px solid var(--dsw-accent-primary, #6387ee);
+  outline-offset: -2px;
+}
+.jsonl-file-list [aria-current='page'] > .jsonl-file-row {
+  background: var(--dsw-background-selected, #6387ee20);
+  font-weight: 600;
+}
+.jsonl-file-list [aria-disabled='true'] > .jsonl-file-row {
+  color: var(--dsw-alias-label-tertiary, #888);
+  cursor: default;
+  background: transparent;
+}
+.jsonl-file-browser svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+.jsonl-file-browser button svg {
+  width: 15px;
+  height: 15px;
+}
+.jsonl-folder-icon {
+  color: var(--dsw-alias-label-tertiary, #999);
+}
+.jsonl-file-row > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jsonl-file-message {
+  padding: 3px 10px;
+  font-size: 12px;
+  color: var(--dsw-alias-label-tertiary, #999);
+  overflow-wrap: anywhere;
+}
+.jsonl-file-message button {
+  width: auto;
+  font: inherit;
 }
 .jsonl-viewer {
   height: 100%;

@@ -6,8 +6,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "typecheck": "tsc -p packages/plugins/large-jsonl-viewer/tsconfig.host.json --noEmit && tsc -p packages/plugins/large-jsonl-viewer/tsconfig.client.json --noEmit",
-    "test": "node --import tsx --test tests/*.test.ts",
-    "test:integration": "node --import tsx --test tests/integration/*.test.ts",
+    "test": "node scripts/test.mjs tests",
+    "test:integration": "node scripts/test.mjs tests/integration",
     "test:packaging": "node scripts/package-test.mjs",
     "pack:plugin": "node scripts/pack.mjs",
     "benchmark": "node --import tsx scripts/benchmark.ts",
@@ -48,6 +48,7 @@
     "@deepseek-ai/dsh-client-shortcuts": "0.2.1-rc.2",
     "@deepseek-ai/dsh-typert-registry": "0.2.1-rc.2",
     "@deepseek-ai/dsh-api-remote-access": "0.2.1-rc.2",
-    "prettier": "3.6.2"
+    "prettier": "3.6.2",
+    "jsdom": "29.1.1"
   }
 }

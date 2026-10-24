@@ -1,5 +1,5 @@
 /** Build the GitHub registry variant in a disposable workspace; never rename the npm source. */
-import { cp, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -26,6 +26,7 @@ try {
   for (const file of [
     'package.json',
     'pnpm-workspace.yaml',
+    'tsconfig.tests.json',
     'tsconfig.base.json',
     'tsconfig.host.json',
     'tsconfig.client.json',
@@ -37,7 +38,7 @@ try {
     await cp(join(root, file), join(stage, file), { recursive: true });
   }
   await mkdir(join(stage, 'scripts'));
-  for (const file of ['build.mjs', 'pack.mjs'])
+  for (const file of ['build.mjs', 'pack.mjs', 'test.mjs'])
     await cp(join(root, 'scripts', file), join(stage, 'scripts', file));
   for (const file of [
     'src',
@@ -70,12 +71,7 @@ try {
     await writeFile(path, JSON.stringify(config, null, 2) + '\n');
   }
   run(['scripts/build.mjs']);
-  for (const folder of ['tests', 'tests/integration']) {
-    const files = (await readdir(join(stage, folder)))
-      .filter((file) => file.endsWith('.test.ts'))
-      .map((file) => join(folder, file));
-    run(['--import', 'tsx', '--test', ...files]);
-  }
+  for (const folder of ['tests', 'tests/integration']) run(['scripts/test.mjs', folder]);
   run(['scripts/pack.mjs', output]);
   const tarball = join(output, `liaojianjin-dsh-large-jsonl-viewer-${manifest.version}.tgz`);
   run([join(root, 'scripts/package-test.mjs'), tarball, name], root);

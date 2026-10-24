@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/v/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm version" /></a>
   <a href="./docs/validation.md"><img src="https://img.shields.io/badge/mode-read--only-4d6bfe?style=flat-square" alt="Read-only viewer" /></a>
   <a href="https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases"><img src="https://img.shields.io/github/v/release/liaojianjin/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="GitHub release" /></a>
-  <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2-172554?style=flat-square" alt="Targets DSH 0.2.1-rc.2" /></a>
+  <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2%20%2F%20rc.3-172554?style=flat-square" alt="Targets DSH 0.2.1-rc.2 / rc.3" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a085?style=flat-square" alt="MIT license" /></a>
   <p><b>English</b> · <a href="./README_ZH.md">简体中文</a></p>
   <p><a href="#-features">Features</a> · <a href="#-installation">Install</a> · <a href="#-measured-performance">Benchmarks</a> · <a href="#-faq">FAQ</a></p>
@@ -26,6 +26,12 @@ Browse records by physical line, preserve the original JSON, and inspect oversiz
 | **🧭 Jump to any record**<br/>First/previous/next/last, physical-line jumps, random sampling and back/forward history. The initial selector exposes the first 100 indexed lines. | **🧾 Keep JSON faithful**<br/>Formatting preserves number lexemes, duplicate keys, key order and escapes. Large integers remain exact text. |
 | **🌲 Navigate the structure**<br/>Read-only Monaco, folding, expansion depth, key navigation, current-record find, word wrap and focus mode. | **🌊 Inspect oversized records**<br/>Above the ordinary-record budget, switch to paged structure and bounded 64 KiB text windows. |
 | **🧩 Open from the file panel**<br/>Native document preview for `.jsonl` / `.ndjson`, with an optional native file route for Better Sidebar 0.28.0. | **💾 Export original bytes**<br/>Keep the record and its original line separator. Stream to a native save picker when available; Blob fallback is capped at 16 MiB. |
+| **🗂️ Working directory file tree**<br/>Open “File tree” to browse folders and files from the current session's working directory, including in fullscreen. | **↔️ Keep your place**<br/>Switch files without losing record position, expanded folders or tree scrolling; use “Reveal current file” when needed. |
+
+<p align="center">
+  <img src="./docs/file-browser.png" alt="File tree rooted at the session working directory, preserving expansion and scrolling between JSONL files" width="100%" />
+  <br /><sub>0.1.3 · Working directory file tree · Retained expansion and scrolling</sub>
+</p>
 
 ### Inside Desktop
 
@@ -38,7 +44,7 @@ Screenshots use generated test data. [Full Desktop validation →](./docs/valida
 
 ## 🚀 Installation
 
-**Target: DeepSeek Harness 0.2.1-rc.2.** Web and official Desktop were verified on macOS arm64, including Better Sidebar 0.28.0. Other Harness versions are not yet claimed compatible.
+**Targets: DeepSeek Harness 0.2.1-rc.2 / 0.2.1-rc.3.** Verified on macOS arm64; see the [validation report](./docs/validation.md) for the exact Web, official Desktop, Better Sidebar 0.28.0 and rc.3 coverage. Other Harness versions are not yet claimed compatible.
 
 ### Desktop
 
@@ -64,10 +70,10 @@ Desktop has its own plugin installation tree. A system CLI's `web` profile is no
 <details>
 <summary><b>Prebuilt Release archive &amp; updating</b></summary>
 
-Download the archive and SHA-256 checksums from [v0.1.2](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.2), or paste its fixed URL into Desktop's Add plugin dialog:
+Download the archive and SHA-256 checksums from [v0.1.3](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.3), or paste its fixed URL into Desktop's Add plugin dialog:
 
 ```text
-https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.2/dsh-large-jsonl-viewer-0.1.2.tgz
+https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.3/dsh-large-jsonl-viewer-0.1.3.tgz
 ```
 
 To replace an installed version in Desktop, uninstall this plugin from its detail page, then install and enable the new version. CLI installation/removal requires restarting the corresponding profile. The repository root is a private development workspace; use the prebuilt package for installation.
@@ -78,6 +84,7 @@ To replace an installed version in Desktop, uninstall this plugin from its detai
 
 | Action | Control |
 | --- | --- |
+| Working directory tree | Click **File tree** to show / hide it; expand folders on demand; **Reveal current file** scrolls to the selection |
 | Browse records | Physical-line input, first/last, previous/next, random |
 | Switch records | `Alt+↑` / `Alt+↓` |
 | Browse history | `Alt+←` / `Alt+→` |

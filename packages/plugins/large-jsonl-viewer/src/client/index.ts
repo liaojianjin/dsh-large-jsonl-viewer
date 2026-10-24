@@ -25,7 +25,7 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
     largeJsonl: Key;
   }
 }
-export const inject = ['remote', 'slots', 'locale', 'documentPreviews'];
+export const inject = ['remote', 'slots', 'locale', 'documentPreviews', 'uiSession'];
 /** Mount before registering the caller, so it never waits on its own namespace. */
 export function apply(ctx: Context): void {
   const store = createTabStore(),
@@ -51,9 +51,11 @@ export function apply(ctx: Context): void {
   ctx.effect(() => ctx.locale.register('largeJsonl', { en, zh }));
   const t = ctx.locale.bind('largeJsonl');
   ctx.effect(() => ctx.remote.$mount(contribution));
-  ctx.inject(['remote.largeJsonl'], (scope) => {
+  ctx.inject(['remote.largeJsonl', 'remote.workspaceFiles'], (scope) => {
     const face = (): ViewerFace => ({
       api: scope.remote.largeJsonl,
+      files: scope.remote.workspaceFiles,
+      browser: store.browser,
       supervise: (options) => scope.remote.$stream(options),
       getState: store.get,
       sessionId(address: string) {

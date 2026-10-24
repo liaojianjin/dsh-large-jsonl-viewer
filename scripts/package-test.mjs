@@ -100,7 +100,7 @@ try {
       if (_deps.includes('betterSidebar') && !ctx.betterSidebar) return;
       fn(ctx);
     },
-    remote: { $mount: async () => () => {}, largeJsonl: {} },
+    remote: { $mount: async () => () => {}, largeJsonl: {}, workspaceFiles: {} },
     locale: {
       register() {
         return () => {};
@@ -127,6 +127,8 @@ try {
     },
   };
   plugin.apply(ctx);
+  assert.ok(pkg.dsh.client.inject.includes('@deepseek-ai/dsh-api-workspace-files'));
+  assert.ok(pkg.dsh.client.inject.includes('@deepseek-ai/dsh-client-ui-session'));
   const stylesheet = styles[0].textContent;
   const iconFont = await readFile(
     resolve('node_modules/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf'),
@@ -140,6 +142,18 @@ try {
     /\.codicon\[class\*=(?:"codicon-"|'codicon-'|codicon-)\]/.test(stylesheet),
     'Codicon glyphs use their bundled icon font',
   );
+  let filesOpen = false;
+  const browserVisibility = {
+    getExpanded: () => [],
+    setExpanded() {},
+    getScrollTop: () => undefined,
+    setScrollTop() {},
+    getSnapshot: () => filesOpen,
+    subscribe: () => () => {},
+    setOpen(open) {
+      filesOpen = open;
+    },
+  };
   const props = {
     useTabInfo: () => ({
       tab: {
@@ -148,11 +162,14 @@ try {
         navigation: { revision: 1 },
       },
     }),
+    useSessions: (selector) => selector({ byId: { s: { cwd: '/workspace' } } }),
     resourceAddress: 'dsh-resource://file/session/s/demo.jsonl',
     content: { kind: 'renderer', revision: 1, loaded() {}, failed() {}, reload() {} },
     wrap: true,
     t: (key) => key,
     api: {},
+    files: { list: async () => ({ ok: true, value: { path: '', entries: [], truncated: false } }) },
+    browser: browserVisibility,
     getState: () => ({
       line: 1,
       depth: 2,
@@ -164,7 +181,15 @@ try {
     }),
     sessionId: () => ({ sessionId: 's', path: 'demo.jsonl' }),
   };
-  assert.match(renderToString(React.createElement(body, props)), /data-jsonl-viewer/);
+  const closedMarkup = renderToString(React.createElement(body, props));
+  assert.match(closedMarkup, /data-jsonl-viewer/);
+  assert.match(closedMarkup, /aria-expanded="false"/);
+  browserVisibility.setOpen(true);
+  const openMarkup = renderToString(React.createElement(body, props));
+  assert.match(openMarkup, /class="jsonl-file-browser"/);
+  assert.match(openMarkup, /aria-label="\/workspace"/);
+  assert.doesNotMatch(openMarkup, /type="search"/);
+  browserVisibility.setOpen(false);
   for (const dispose of effects.reverse()) {
     const value = await dispose;
     if (typeof value === 'function') await value();

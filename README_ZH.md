@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/dsh-large-jsonl-viewer"><img src="https://img.shields.io/npm/v/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="npm 版本" /></a>
   <a href="./docs/validation.md"><img src="https://img.shields.io/badge/mode-read--only-4d6bfe?style=flat-square" alt="只读查看器" /></a>
   <a href="https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases"><img src="https://img.shields.io/github/v/release/liaojianjin/dsh-large-jsonl-viewer?style=flat-square&amp;color=4d6bfe" alt="GitHub 发布版本" /></a>
-  <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2-172554?style=flat-square" alt="适配 DSH 0.2.1-rc.2" /></a>
+  <a href="./docs/compatibility.md"><img src="https://img.shields.io/badge/DSH-0.2.1--rc.2%20%2F%20rc.3-172554?style=flat-square" alt="适配 DSH 0.2.1-rc.2 / rc.3" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-16a085?style=flat-square" alt="MIT 许可证" /></a>
   <p><a href="./README.md">English</a> · <b>简体中文</b></p>
   <p><a href="#-功能一览">功能</a> · <a href="#-安装">安装</a> · <a href="#-实测性能">性能</a> · <a href="#-常见问题">常见问题</a></p>
@@ -26,6 +26,12 @@
 | **🧭 定位任意记录**<br/>首行、上一行、下一行、末行、物理行跳转、随机抽样与前后历史。初始选择器展示前 100 条已索引记录。 | **🧾 保留 JSON 原貌**<br/>格式化保留数字字面量、重复 key、key 顺序与转义。大整数按精确文本展示。 |
 | **🌲 看清数据结构**<br/>只读 Monaco、折叠与展开层级、key 导航、本条查找、自动换行和专注模式。 | **🌊 查看超长记录**<br/>超过普通记录预算后，切换为分页结构和有界的 64 KiB 原文窗口。 |
 | **🧩 从文件面板直接打开**<br/>原生预览支持 `.jsonl` / `.ndjson`；启用 Better Sidebar 0.28.0 时使用专用原生文件路由。 | **💾 导出原始字节**<br/>保留记录与原有行分隔符。可用时通过原生保存对话框分块写入；Blob 回退上限为 16 MiB。 |
+| **🗂️ 工作目录文件树**<br/>点击“文件树”，从当前会话工作目录逐层浏览全部目录与文件；全屏下同样可用。 | **↔️ 切换文件保留位置**<br/>保留阅读位置、目录展开状态及文件树滚动位置；需要时点击“定位当前文件”。 |
+
+<p align="center">
+  <img src="./docs/file-browser.png" alt="从当前会话工作目录开始的文件树，切换 JSONL 时保留目录和滚动位置" width="100%" />
+  <br /><sub>0.1.3 · 工作目录文件树 · 保留展开与滚动位置</sub>
+</p>
 
 ### Desktop 实际效果
 
@@ -38,7 +44,7 @@
 
 ## 🚀 安装
 
-**目标版本：DeepSeek Harness 0.2.1-rc.2。** 已在 macOS arm64 的 Web、官方 Desktop 和 Better Sidebar 0.28.0 中验证，其他 Harness 版本暂未声明兼容。
+**兼容版本：DeepSeek Harness 0.2.1-rc.2 / 0.2.1-rc.3。** 已在 macOS arm64 验证；Web、官方 Desktop、Better Sidebar 0.28.0 与 rc.3 的具体验收范围见[验证报告](./docs/validation.md)。其他 Harness 版本暂未声明兼容。
 
 ### Desktop
 
@@ -64,10 +70,10 @@ Desktop 有自己的插件安装树，不能假定系统 CLI 的 `web` profile �
 <details>
 <summary><b>预编译 Release 安装包与更新</b></summary>
 
-从 [v0.1.2](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.2) 下载 tgz 与 SHA-256 校验文件，或把固定版本地址粘贴到 Desktop 的添加插件对话框：
+从 [v0.1.3](https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/tag/v0.1.3) 下载 tgz 与 SHA-256 校验文件，或把固定版本地址粘贴到 Desktop 的添加插件对话框：
 
 ```text
-https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.2/dsh-large-jsonl-viewer-0.1.2.tgz
+https://github.com/liaojianjin/dsh-large-jsonl-viewer/releases/download/v0.1.3/dsh-large-jsonl-viewer-0.1.3.tgz
 ```
 
 Desktop 替换已安装版本时，先在该插件详情中卸载，再安装并启用新版。CLI 安装或卸载后需重启对应 profile。仓库根目录是 private 开发工作区，安装应使用预编译包。
@@ -78,6 +84,7 @@ Desktop 替换已安装版本时，先在该插件详情中卸载，再安装并
 
 | 操作 | 控件或快捷键 |
 | --- | --- |
+| 工作目录文件树 | 点击 **文件树** 显示 / 隐藏；目录按需展开；**定位当前文件** 主动滚动定位 |
 | 浏览记录 | 物理行输入框、首行/末行、上一行/下一行、随机 |
 | 切换记录 | `Alt+↑` / `Alt+↓` |
 | 浏览历史 | `Alt+←` / `Alt+→` |

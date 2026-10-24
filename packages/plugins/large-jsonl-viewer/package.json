@@ -1,6 +1,6 @@
 {
   "name": "dsh-large-jsonl-viewer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "description": "Indexed, read-only JSONL and NDJSON document preview for DeepSeek Harness",
   "license": "MIT",
@@ -17,7 +17,7 @@
   "bugs": "https://github.com/liaojianjin/dsh-large-jsonl-viewer/issues",
   "engines": {
     "node": "^22.19.0 || >=24",
-    "dsh": "0.2.1-rc.2"
+    "dsh": "0.2.1-rc.2 || 0.2.1-rc.3"
   },
   "main": "./lib/index.js",
   "types": "./lib/types/index.d.ts",
@@ -78,6 +78,8 @@
       "immediately": true,
       "inject": [
         "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-api-workspace-files",
+        "@deepseek-ai/dsh-client-ui-session",
         "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
         "@deepseek-ai/dsh-client-ui-sidebar-right",
         "@deepseek-ai/dsh-client-locale"
@@ -86,9 +88,9 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "4.0.5",
-    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
-    "@deepseek-ai/dsh-api-workspace-files": "0.2.1-rc.2",
-    "@deepseek-ai/dsh-fs": "0.2.1-rc.2"
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-api-workspace-files": "0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-fs": "0.2.1-rc.2 || 0.2.1-rc.3"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "4.0.5",

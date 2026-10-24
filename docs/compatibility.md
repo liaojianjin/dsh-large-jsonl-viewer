@@ -1,6 +1,16 @@
 # Compatibility and build notes
 
-Implementation date: 2026-10-20 (Asia/Shanghai). The plugin targets Harness **0.2.1-rc.2**, Cordis **4.0.5**. Public DSH dependencies and the lockfile are pinned; other Harness releases are not claimed compatible.
+Version **0.1.3** targets Harness **0.2.1-rc.2 or 0.2.1-rc.3**, Cordis **4.0.5**. The host engine and shared DSH peer ranges declare only those two verified versions. Development dependencies remain pinned to rc.2; other Harness releases are not claimed compatible.
+
+## 2026-10-24 rc.3 assessment
+
+- Compared the official tags [rc.2 and rc.3](https://github.com/deepseek-ai/deepseek-harness/compare/dsh-v0.2.1-rc.2...dsh-v0.2.1-rc.3). The file, Session, Gateway, Typert, locale, module-loading and document-preview interfaces used by this plugin have no source changes; right-sidebar changes add guide-menu/pinning features without changing the file-tab operations used here.
+- Installed the actual published rc.3 dependencies into a separate temporary workspace. The existing v0.1.2 runtime passes all 18 original tests and Host/Client type checks there.
+- The new lazy file-tree implementation also builds and runs against rc.2 and rc.3. It reads the same `useSessions().byId[sessionId].cwd` as the official file sidebar, lists absolute directory paths from that root, shows the complete directory, and uses tab-owned resource opening; it does not import Better Sidebar internals.
+- The root directory must be requested as a dot, although directory-list replies name it with an empty path. A real Gateway regression exercises both the dot and absolute-cwd contracts. The new tree sends cwd and absolute child paths, using the requested path as its tree key rather than the reply path.
+- Runtime tests use a separate automatic-JSX config without build-only declaration aliases. The DOM regressions mount the actual React components and check nested expansion, retained ancestors and siblings, file/expansion state across resource remounts, absolute-path reveal, keyboard navigation, retry, request disposal, late-reply rejection, persistent tree scrolling across file changes/native remounts, delayed subtree restoration and cancellation when the user scrolls.
+
+The previously published v0.1.2 manifest and artifacts remain unchanged. Install v0.1.3 to receive the expanded compatibility declaration and file tree.
 
 ## Confirmed
 
